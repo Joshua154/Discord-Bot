@@ -62,14 +62,6 @@ const Dice = {
                 }
             }
 
-            //interaction.customClient.writeToDatabse(rolluser, result, count)
-
-
-            //let displayUser = interaction.guild.members.find(user => user.id === rolluser.id);
-            //console.log(rolluser)
-            //console.log(displayUser)
-            /*let nickname = member ? member.displayName : null;
-            console.log(nickname);*/
             return {title: result, description: `${first} + ${second}`, author: { name: `${rolluser.username}`, iconURL: `${rolluser.displayAvatarURL()}`}};
 
         } catch (e) {
@@ -129,6 +121,8 @@ const Dice = {
         }
     }
 }
+
+
 
 /*var sql = "INSERT INTO " + table_name + " (username, userID, guildName, guildID, status, Activity, activityType, state) VALUES ('" + newMember.user.username + "', '" + newMember.user.id + "', '" + newMember.guild.name + "', '" + newMember.guild.id + "', '" + newMember.status + "', '" + acName + "', '" + acType + "', '" + acState + "')";
     con.query(sql, function (err, result) {

@@ -1,5 +1,5 @@
 const {SlashCommandBuilder, MessageEmbed, EmbedBuilder} = require("discord.js");
-const { host, user, password, database, table_name } = require("../../config.json")
+const { privateVoiceChannel } = require("../../config.json")
 let count = 0;
 const substitutes = require("./substitutes.json");
 
@@ -110,7 +110,13 @@ const Dice = {
     async sendEmbed(interaction) {
         let ephemeral = interaction.options.getBoolean("private") ?? false;
 
-        interaction.reply({embeds: [Dice.roll(interaction)], ephemeral});
+        let emb = {embeds: [Dice.roll(interaction)], ephemeral};
+
+        interaction.reply(emb);
+        if (ephemeral){
+            interaction.client.channels.fetch(privateVoiceChannel)
+                .then(channel => channel.send(emb));
+        }
     }
 }
 

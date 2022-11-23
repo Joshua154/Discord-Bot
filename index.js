@@ -25,6 +25,8 @@ client.player = new DisTube(client, {
 	],
 });
 
+client.test = "test187";
+
 client.writeToDatabse = (rolluser, result, count) => {
 	try{
 		var con = mysql.createConnection({ host, user, password, database });
