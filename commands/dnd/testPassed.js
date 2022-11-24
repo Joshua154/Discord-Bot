@@ -2,6 +2,7 @@ const {SlashCommandBuilder, MessageEmbed, EmbedBuilder} = require("discord.js");
 const { privateVoiceChannel } = require("../../config.json")
 let count = 0;
 const substitutes = require("./substitutes.json");
+const Dice = require("../../util/Dice.js");
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -27,11 +28,14 @@ module.exports = {
         ),
 
     async execute(interaction) {
-        return Dice.sendEmbed(interaction);
+        //return Dice.sendEmbed(interaction);
+        //const options = interaction.options;
+        //interaction.reply(Dice.sendEmbed(options.getBoolean("private"), options.getInteger("times"), options.getUser("user") ?? interaction.user))
+        await Dice.sendEmbed(interaction)
     },
 };
 
-const Dice = {
+/*const Dice = {
     roll(interaction, count) {
         try {
             let first = this.rollDice(10);

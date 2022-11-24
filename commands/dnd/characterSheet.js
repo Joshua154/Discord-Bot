@@ -102,7 +102,7 @@ module.exports = {
                 let embeds = []
                 let pdfs = []
                 for (const mapKey in map) {
-                    if(mapKey === "Elias_Guteseele" || true){
+
                         const timeStamp = Math.max(...map[mapKey]);
                         console.log(`${__storage}/campaigns/${campaign}/${mapKey}_${timeStamp}.pdf`)
                         const pdf = fs.readFileSync(`${__storage}/campaigns/${campaign}/${mapKey}_${timeStamp}.pdf`);
@@ -122,7 +122,7 @@ module.exports = {
                             .setTimestamp(timeStamp);
                         embeds.push(embed)
                         interaction.channel.send({embeds: [embed], files: [pdf]});
-                    }
+
                     //console.log(`${campaignsPath}/${campaign}${mapKey}_${Math.max(...map[mapKey])}.pdf`)
                 }
 

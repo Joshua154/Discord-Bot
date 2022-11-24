@@ -61,6 +61,15 @@ module.exports = {
             return {embeds: [embed], ephemeral: ephemeral};
         }
     },
+    getRow(type) {
+        return new ActionRowBuilder()
+            .addComponents(
+                new ButtonBuilder()
+                    .setCustomId('diceButton_' + type.toLowerCase())
+                    .setLabel(type)
+                    .setStyle(ButtonStyle.Success),
+            )
+    },
     async sendEmbed(interaction) {
         let user = interaction.user;
         if(interaction.isCommand() && interaction.options.getUser("user") !== null){
@@ -68,15 +77,8 @@ module.exports = {
         }
 
         let emb = this.getEmbed(interaction.options.getBoolean("private") ?? false, interaction.options.getInteger("times"), user)
-        const row = new ActionRowBuilder()
-            .addComponents(
-                new ButtonBuilder()
-                    .setCustomId('diceButton_dice')
-                    .setLabel('roll a die')
-                    .setStyle(ButtonStyle.Primary),
-            );
 
-        interaction.reply({embeds: emb.embeds, ephemeral: emb.ephemeral, components: [row]})
+        interaction.reply({embeds: emb.embeds, ephemeral: emb.ephemeral, components: [this.getRow("Dice")]})
         let ephemeral = interaction.options.getBoolean("private") ?? false;
         /*if (ephemeral){
             interaction.client.channels.fetch(privateVoiceChannel)
