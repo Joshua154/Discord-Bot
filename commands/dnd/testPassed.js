@@ -2,6 +2,7 @@ const {SlashCommandBuilder, MessageEmbed, EmbedBuilder} = require("discord.js");
 const { privateVoiceChannel } = require("../../config.json")
 let count = 0;
 const substitutes = require("./substitutes.json");
+const Dice = require("../../util/Dice.js");
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -27,11 +28,14 @@ module.exports = {
         ),
 
     async execute(interaction) {
-        return Dice.sendEmbed(interaction);
+        //return Dice.sendEmbed(interaction);
+        //const options = interaction.options;
+        //interaction.reply(Dice.sendEmbed(options.getBoolean("private"), options.getInteger("times"), options.getUser("user") ?? interaction.user))
+        await Dice.sendEmbed(interaction)
     },
 };
 
-const Dice = {
+/*const Dice = {
     roll(interaction, count) {
         try {
             let first = this.rollDice(10);
@@ -62,14 +66,6 @@ const Dice = {
                 }
             }
 
-            //interaction.customClient.writeToDatabse(rolluser, result, count)
-
-
-            //let displayUser = interaction.guild.members.find(user => user.id === rolluser.id);
-            //console.log(rolluser)
-            //console.log(displayUser)
-            /*let nickname = member ? member.displayName : null;
-            console.log(nickname);*/
             return {title: result, description: `${first} + ${second}`, author: { name: `${rolluser.username}`, iconURL: `${rolluser.displayAvatarURL()}`}};
 
         } catch (e) {
@@ -129,6 +125,8 @@ const Dice = {
         }
     }
 }
+
+
 
 /*var sql = "INSERT INTO " + table_name + " (username, userID, guildName, guildID, status, Activity, activityType, state) VALUES ('" + newMember.user.username + "', '" + newMember.user.id + "', '" + newMember.guild.name + "', '" + newMember.guild.id + "', '" + newMember.status + "', '" + acName + "', '" + acType + "', '" + acState + "')";
     con.query(sql, function (err, result) {

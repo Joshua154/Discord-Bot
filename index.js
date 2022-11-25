@@ -7,6 +7,7 @@ const { SoundCloudPlugin } = require("@distube/soundcloud");
 const { YtDlpPlugin } = require("@distube/yt-dlp");
 const mysql = require("mysql");
 const {host, user, password, database, table_name} = require("./config.json");
+const Dice = require("./util/Dice.js");
 
 module.exports = client = new Client({ partials:["Channel", "GuildMember", "User"], intents: ['Guilds', 'GuildMessages', "MessageContent", "GuildVoiceStates"] });
 
@@ -24,6 +25,8 @@ client.player = new DisTube(client, {
 		new YtDlpPlugin(),
 	],
 });
+
+client.test = "test187";
 
 client.writeToDatabse = (rolluser, result, count) => {
 	try{
@@ -134,9 +137,20 @@ client.on('interactionCreate', async interaction => {
 
 
 	else if (interaction.isButton()){
+
 		if (interaction.customId.match(/(option)([12345])/i)){
 			prosesOption(interaction);
 		}
+		else if (interaction.customId.match(/(diceButton_)/i)){
+            let arg = interaction.customId.split("_")[1]
+            if(arg === "dice"){
+				const dice = Dice.getEmbed(false, 1, interaction.user);
+                interaction.reply({embeds: dice.embeds, ephemeral: dice.ephemeral, components: [Dice.getRow("Dice")]})
+				await interaction.message.edit({
+					components: []
+				})
+            }
+        }
 		else {
 			const button = client.buttons.get(interaction.customId.split("_")[0].replace("_", ""));
 			if (!button) return;

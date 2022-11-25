@@ -1,14 +1,16 @@
 const client = require("../index.js")
-const { EmbedBuilder } = require('discord.js');
+const { EmbedBuilder, Events } = require('discord.js');
+//const Dice = require("../util/Dice.js")
 
-client.on('interactionCreate', async interaction => {
+
+client.on(Events.InteractionCreate, async interaction => {
     if (interaction.isCommand()){
         const command = client.commands.get(interaction.commandName);
 
         if (!command) return;
 
         try {
-            interaction.customClient = client;
+            interaction.customClient = client.test;
             await command.execute(interaction);
         } catch (error) {
             console.error(error);
@@ -27,10 +29,16 @@ client.on('interactionCreate', async interaction => {
         }
     }
     else if (interaction.isButton()){
-        interaction.send("test")
         if (interaction.customId.match(/(option)([12345])/i)){
             prosesOption(interaction);
         }
+        /*else if (interaction.customId.match(/(diceButton_)/i)){
+            let arg = interaction.customId.split("_")[1]
+            console.log(arg)
+            if(arg === "dice"){
+                interaction.reply(Dice.getEmbed(false, 1, interaction.user))
+            }
+        }*/
     }
     else if (interaction.isSelectMenu()){
         const SelectMenuName = client.selectMenu.get(interaction.customId);
