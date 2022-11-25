@@ -31,7 +31,14 @@ module.exports = {
             //console.log(displayUser)
             /*let nickname = member ? member.displayName : null;
             console.log(nickname);*/
-            return {title: result, description: `${first} + ${second}`, author: { name: `${rolluser.username}`, iconURL: `${rolluser.displayAvatarURL()}`}};
+            return {
+                title: result,
+                //description: `${first} + ${second}`,
+                author: {
+                    name: `${rolluser.username}`,
+                    iconURL: `${rolluser.displayAvatarURL()}`
+                }
+            };
 
         } catch (e) {
             return {title: "Error", description: "Invalid dice roll:\n" + e};
