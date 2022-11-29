@@ -31,7 +31,7 @@ module.exports = {
         //return Dice.sendEmbed(interaction);
         //const options = interaction.options;
         //interaction.reply(Dice.sendEmbed(options.getBoolean("private"), options.getInteger("times"), options.getUser("user") ?? interaction.user))
-        await Dice.sendEmbed(interaction)
+        await Dice.sendEmbed(interaction, "dice")
     },
 };
 

@@ -143,9 +143,11 @@ client.on('interactionCreate', async interaction => {
 		}
 		else if (interaction.customId.match(/(diceButton_)/i)){
             let arg = interaction.customId.split("_")[1]
-            if(arg === "dice"){
-				const dice = Dice.getEmbed(false, 1, interaction.user);
-                interaction.reply({embeds: dice.embeds, ephemeral: dice.ephemeral, components: [Dice.getRow("Dice")]})
+            if(arg === "dice" || arg === "bodyPart" || arg === "crit"){
+				const dice = Dice.getEmbed(interaction, false, 1, interaction.user, arg);
+				let crit = ((arg === "dice") && isCrit(dice.embeds[0].data.title))
+                interaction.reply({embeds: dice.embeds, ephemeral: dice.ephemeral, components: [Dice.getRow(crit)]})
+				//await Dice.sendEmbed(interaction, arg);
 				await interaction.message.edit({
 					components: []
 				})
@@ -166,6 +168,12 @@ client.on('interactionCreate', async interaction => {
 
 client.login(token);
 
+
+function isCrit(number){
+	number = number.split();
+	return number.length === 3 || number[0] === number[1];
+
+}
 
 
 /*async function prosesOption(interaction){
