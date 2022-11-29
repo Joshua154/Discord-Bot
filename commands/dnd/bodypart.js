@@ -2,6 +2,7 @@ const {SlashCommandBuilder, MessageEmbed, EmbedBuilder} = require("discord.js");
 let count = 0;
 const substitutes = require("./substitutes.json");
 //const client = require("../../index.js");
+const Dice = require("../../util/Dice.js");
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -27,11 +28,11 @@ module.exports = {
         ),
 
     async execute(interaction) {
-        return Dice.sendEmbed(interaction);
+        return Dice.sendEmbed(interaction, "bodyPart");
     },
 };
 
-const Dice = {
+/*const Dice = {
     roll(interaction, count) {
         try {
             let first = this.rollDice(10);

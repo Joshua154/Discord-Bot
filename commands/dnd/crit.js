@@ -2,6 +2,7 @@ const {SlashCommandBuilder, MessageEmbed, EmbedBuilder} = require("discord.js");
 const { privateVoiceChannel } = require("../../config.json")
 let count = 0;
 const substitutes = require("./substitutes.json");
+const Dice = require("../../util/Dice.js");
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -37,7 +38,7 @@ module.exports = {
     },
 };
 
-const Dice = {
+/*const Dice = {
     roll(interaction) {
         try {
             let role = this.rollDice(99) + 1;
@@ -616,4 +617,4 @@ class critTable{
                 "You die instantly from traumatic shock."
         }
     }
-}
+}*/
