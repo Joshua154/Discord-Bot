@@ -31,7 +31,7 @@
 
 ## 📍 Overview
 
-The project is a Node JS Discord bot that was created to learn how to use the Discord.js library and JS it self.
+The project is a Node JS Discord bot that was created to learn how to use the Discord.js library and JS it self. Accordingly, this project is a bit older and not up to date.
 
 ---
 
